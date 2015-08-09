@@ -11,15 +11,19 @@
     activeImage.css('left', originalImageLocation.x + delta.x)
   }
 
+  var setOGImageLocation = function () {
+    originalImageLocation = {
+      x: parseInt(activeImage.css('left')),
+      y: parseInt(activeImage.css('top'))
+    }
+  }
+
   $('img').mousedown(function (event) {
     event.preventDefault();
     activeImage = $(event.currentTarget);
     isDragging = true;
     startingMouseLocation = {x: event.clientX, y: event.clientY};
-    originalImageLocation = {
-      x: parseInt(activeImage.css('left')),
-      y: parseInt(activeImage.css('top'))
-    }
+    setOGImageLocation();
   });
 
   $('img').mousemove(function (event) {
@@ -40,6 +44,7 @@
   });
 
   $(window).keydown(function (event){
+    event.preventDefault();
     var key = event.keyCode;
     var arrowDelta;
 
@@ -48,15 +53,16 @@
         arrowDelta = {x: -1, y: 0}
         break;
       case 38: // up
-        arrowDelta = {x: 0, y: 1}
+        arrowDelta = {x: 0, y: -1}
         break;
       case 39: // right
         arrowDelta = {x: 1, y: 0}
         break;
       case 40: // down
-        arrowDelta = {x: 0, y: -1}
+        arrowDelta = {x: 0, y: 1}
         break;
     }
+    setOGImageLocation();
     applydelta(arrowDelta)
   });
 

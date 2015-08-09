@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.merged-group {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.merged-group > img {
+  width: 100%;  
+  opacity: 0.1;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px solid white;
+}
+
+.unmerged-group > img {
+  float: left;
+  width: 50%;
+}
+
+
+#something-with-an-id
+.something-with-a-class
+just-a-normal-tag-name

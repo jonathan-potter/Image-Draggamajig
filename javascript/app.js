@@ -1,6 +1,6 @@
 'use strict'
 
-
+  var currentEvent;
   var activeImage;
   var isDragging = false
   var startingMouseLocation = {x: 0, y: 0};
@@ -18,9 +18,17 @@
     }
   }
 
+  var clearSelected = function () {
+    activeImage = null;
+    $('img').attr('id', '')
+  } 
+
   $('img').mousedown(function (event) {
     event.preventDefault();
+    clearSelected();
+    currentEvent = event
     activeImage = $(event.currentTarget);
+    activeImage.attr('id', 'selected-image');
     isDragging = true;
     startingMouseLocation = {x: event.clientX, y: event.clientY};
     setOGImageLocation();
@@ -43,7 +51,7 @@
     isDragging = false;
   });
 
-  $(window).keydown(function (event){
+  $(window).keydown(function (event) {
     event.preventDefault();
     var key = event.keyCode;
     var arrowDelta;
@@ -62,7 +70,16 @@
         arrowDelta = {x: 0, y: 1}
         break;
     }
-    setOGImageLocation();
-    applydelta(arrowDelta)
+    if (arrowDelta) {
+      setOGImageLocation();
+      applydelta(arrowDelta)
+    }
   });
+
+  $(window).mousedown(function (event) {
+    event.preventDefault();
+    if (event.originalEvent !== currentEvent.originalEvent) {
+      clearSelected();
+    }
+  })
 

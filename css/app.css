@@ -3,16 +3,24 @@ html, body {
   width: 100%;
 }
 
+.flipped-image {
+  transform: rotate(180deg);
+}
+
+#selected-image {
+  opacity: 0.5;
+}
+
 .merged-group {
   display: block;
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 50%;
+  height: 50%;
 }
 
 .merged-group > img {
-  width: 100%;  
-  opacity: 0.1;
+  width: 50%;  
+  opacity: 0.2;
 
   position: absolute;
   top: 0;
